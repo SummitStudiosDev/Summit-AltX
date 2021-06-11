@@ -1,0 +1,22 @@
+{
+  "name": "summit-altx",
+  "version": "1.0.0",
+  "description": "A minecraft alt checker created by SummitStudios",
+  "main": "index.js",
+  "scripts": {
+    "start": "node   --no-deprecation index.js"
+  },
+  "author": "SummitStudiosDEV",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dialog-node": "^0.2.1",
+    "eol": "^0.9.1",
+    "http": "0.0.1-security",
+    "https-proxy-agent": "^5.0.0",
+    "prompt-sync": "^4.2.0",
+    "proxy-verifier": "^0.4.3",
+    "tunnel": "0.0.6",
+    "win-select-file": "^1.0.2"
+  }
+}
