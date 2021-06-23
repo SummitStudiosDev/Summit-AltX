@@ -197,6 +197,14 @@ async function run(){
 		  if(message != "bad"){
 			  //write to file
 				fs.appendFile('./results/hits.txt', message.combo+"\n", function (err) {});
+				fs.appendFile('./results/info.txt', 
+`=======================================
+${message.combo}
+IGN: ${message.ign}
+UUID: ${message.uuid}
+Email: ${message.email}
+Password: ${message.password}\n`
+				, function (err){});
 		  }
 		  workers[i].postMessage(getAccount());
 		});
