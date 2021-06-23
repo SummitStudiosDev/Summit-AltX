@@ -42,6 +42,15 @@ function rnum(min, max) {
 
 
 async function setup(){
+	
+	fs.mkdir('./results', { recursive: true }, (err) => {
+	  if (err) throw err;
+	});
+	fs.writeFile("./results/hits.txt", "", function(err) {}); 
+	fs.writeFile("./results/info.txt", "", function(err) {}); 
+
+	
+	
 	if(OS != "linux" && OS != "darwin" && OS != "win32"){
 		console.log("unknown OS: ", OS);
 		process.exit(9);
@@ -185,6 +194,10 @@ async function run(){
 	for (let i = 0; i < num_workers; ++i) {	
 		workers[i].on('message', (message) => {
 		  //console.log(message);
+		  if(message != "bad"){
+			  //write to file
+				fs.appendFile('./results/hits.txt', message.combo+"\n", function (err) {});
+		  }
 		  workers[i].postMessage(getAccount());
 		});
 	}

